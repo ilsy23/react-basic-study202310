@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // css 로딩
 import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate';
-import Card from './UI/Card';
+import Card from '../UI/Card';
 
 const ExpenseItem = ({ title, price: propsPrice, date }) => {
   // let itemTitle = title;
