@@ -22,6 +22,11 @@ const App = () => {
       price: 35000,
       date: new Date(2023, 7 - 1, 4),
     },
+    {
+      title: '엽기떡볶이',
+      price: 17000,
+      date: new Date(2023, 3 - 1, 28),
+    },
   ];
 
   //ExpenseForm에게 내려보낼 함수
