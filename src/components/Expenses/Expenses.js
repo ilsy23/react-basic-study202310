@@ -3,6 +3,7 @@ import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 import ExpensesFilter from './ExpensesFilter';
 import Card from '../UI/Card';
+import ExpenseChart from './ExpenseChart';
 
 const Expenses = ({ items }) => {
   // 선택된 연도 상태값 관리
@@ -32,20 +33,29 @@ const Expenses = ({ items }) => {
   //   ));
   // };
 
+  const filteredItems = items.filter(
+    (item) => item.date.getFullYear().toString() === filteredYear
+  );
+
+  // 조건부 렌더링을 위한 변수
+  let expenseContent = <p>아직 등록된 지출이 없습니다.</p>;
+
+  if (filteredItems.length > 0) {
+    expenseContent = filteredItems.map((item) => (
+      <ExpenseItem
+        key={item.id}
+        title={item.title}
+        price={item.price}
+        date={item.date}
+      />
+    ));
+  }
+
   return (
     <Card className='expenses'>
       <ExpensesFilter onChangeFilter={filterChangeHandler} />
-
-      {items
-        .filter((item) => item.date.getFullYear().toString() === filteredYear)
-        .map((item) => (
-          <ExpenseItem
-            key={item.id}
-            title={item.title}
-            price={item.price}
-            date={item.date}
-          />
-        ))}
+      <ExpenseChart />
+      {expenseContent}
     </Card>
   );
 };
