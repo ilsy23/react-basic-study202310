@@ -18,6 +18,9 @@
     "react/react-in-jsx-scope": "off",
     "spaced-comment": "off",
     "react/prop-types": "off",
-    "object-curly-spacing": "off"
+    "object-curly-spacing": "off",
+    "prefer-const": "off",
+    "react/jsx-key": "off",
+    "indent": "off"
   }
 }
