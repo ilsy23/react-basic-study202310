@@ -6,7 +6,7 @@ const Button = ({ type, onClick, children }) => {
     <button
       type={type}
       className='button'
-      onClick={onclick}
+      onClick={onClick}
     >
       {children}
     </button>

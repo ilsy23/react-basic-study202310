@@ -1,10 +1,19 @@
 import React from 'react';
 import './CourseList.css';
+import CourseItem from './CourseItem';
 
-const CourseList = () => {
+const CourseList = ({ items, onDelete }) => {
   return (
     <ul className='goal-list'>
-      <li></li>
+      {items.map((item) => {
+        return (
+          <CourseItem
+            key={item.id}
+            item={item}
+            onDelete={onDelete}
+          />
+        );
+      })}
     </ul>
   );
 };
