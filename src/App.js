@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainHeader from './components/SideEffect/MainHeader/MainHeader';
 import Home from './components/SideEffect/Home/Home';
 import Login from './components/SideEffect/Login/Login';
@@ -10,10 +10,16 @@ const App = () => {
   // 화면이 리렌더링 될 때 localStorage를 확인해서
   // 현재 login-flag가 존재하는지 검사.
   console.log('로그인 검사 수행');
-  const storedLoginFlag = localStorage.getItem('login-flag');
-  if (storedLoginFlag === '1') {
-    setIsLoggedIn(true);
-  }
+
+  // 기존에 로그인 한 사람인지 확인하는 코드는
+  // 리렌더링 될 때마다 실행되면 안됨!
+  useEffect(() => {
+    console.log('useEffect 실행! - 최초 단 한번만 실행됨!');
+    const storedLoginFlag = localStorage.getItem('login-flag');
+    if (storedLoginFlag === '1') {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   // 서버로 로그인을 요청하는 함수 (나중에는 fetch를 통한 백엔드와의 연계가 필요.)
   const loginHandler = (email, password) => {
@@ -22,9 +28,17 @@ const App = () => {
     setIsLoggedIn(true);
   };
 
+  const logoutHandler = () => {
+    localStorage.removeItem('login-flag');
+    setIsLoggedIn(false);
+  };
+
   return (
     <>
-      <MainHeader />
+      <MainHeader
+        isAuthenticated={isLoggedIn}
+        onLogout={logoutHandler}
+      />
       <main>
         {isLoggedIn && <Home />}
         {!isLoggedIn && <Login onLogin={loginHandler} />}
