@@ -1,15 +1,17 @@
 import React from 'react';
-import styles from './Input.module.css';
+import styles from './Input.module.scss';
 
-const Input = ({ id, label, type, value, isValid, ...rest }) => {
+const Input = ({ input, label, onAdd }) => {
+  const amountChangeHandler = (e) => {
+    onAdd(e.target.value);
+  };
+
   return (
-    <div className={`${styles.control} ${!isValid ? styles.invalid : ''}`}>
-      <label htmlFor={id}>{label}</label>
+    <div className={styles.input}>
+      <label htmlFor={input.id}>{label}</label>
       <input
-        type={type}
-        id={id}
-        value={value}
-        {...rest}
+        {...input}
+        onChange={amountChangeHandler}
       />
     </div>
   );
